@@ -5,5 +5,12 @@
 	<classpathentry kind="lib" path="C:/javalib/YahooFinanceAPI-3.6.0/YahooFinanceAPI-3.6.0.jar"/>
 	<classpathentry kind="lib" path="C:/javalib/YahooFinanceAPI-3.6.0/YahooFinanceAPI-3.6.0-javadoc.jar"/>
 	<classpathentry kind="lib" path="C:/javalib/YahooFinanceAPI-3.6.0/YahooFinanceAPI-3.6.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/javalib/commons-math3-3.6.1-bin/commons-math3-3.6.1/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/javalib/commons-math3-3.6.1-bin/commons-math3-3.6.1/commons-math3-3.6.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/javalib/commons-math3-3.6.1-bin/commons-math3-3.6.1/commons-math3-3.6.1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/javalib/commons-math3-3.6.1-bin/commons-math3-3.6.1/commons-math3-3.6.1-tests.jar"/>
+	<classpathentry kind="lib" path="C:/javalib/commons-math3-3.6.1-bin/commons-math3-3.6.1/commons-math3-3.6.1-test-sources.jar"/>
+	<classpathentry kind="lib" path="C:/javalib/commons-math3-3.6.1-bin/commons-math3-3.6.1/commons-math3-3.6.1-tools.jar"/>
+	<classpathentry kind="lib" path="C:/javalib/streamex-master/streamex.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
