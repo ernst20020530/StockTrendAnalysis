@@ -3,8 +3,7 @@ package org.bwang;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.*;
 import java.math.*;
 
 import yahoofinance.*;
@@ -33,10 +32,10 @@ public class StockTrendAnalysis {
 	
 	public void process(){
 		Calendar from = Calendar.getInstance();
-		from.set(2016, 12, 1);
+		from.set(2016, 1, 1);
 		Calendar to = Calendar.getInstance();
-		to.set(2017, 1, 31);
-		m_stockDataList.stream().forEach(x->System.out.println(x.GetSymbol() + " " + x.GetAverage(from, to, Interval.DAILY, HistoricalQuote::getClose).getAsDouble()));
+		to.set(2017, 1, 1);
+		//m_stockDataList.stream().forEach(x->System.out.println(x.GetSymbol() + " " + x.GetAverage(from, to, Interval.DAILY, HistoricalQuote::getClose).getAsDouble()));
 		
 		m_stockDataList.stream().forEach(x->{
 			List<Double> ds = null;
@@ -49,6 +48,8 @@ public class StockTrendAnalysis {
 			
 			List<Double> closeDiff = StreamEx.of(ds).pairMap((a,b)->(Math.log(b)-Math.log(a))).collect(Collectors.toList());
 			
+			IntStream.range(0, closeDiff.size()).forEach(i -> System.out.println(i + "\t" + closeDiff.get(i)));
+
 		});
 		
 		
@@ -82,7 +83,7 @@ public class StockTrendAnalysis {
 	
 	static private StockTrendAnalysis singleton;
 	
-	static private final String[] stockSymbolList = new String[]{"XLF", "XLE"};
+	static private final String[] stockSymbolList = new String[]{"MSFT"};
 	
 	private List<StockData> m_stockDataList;
 }
