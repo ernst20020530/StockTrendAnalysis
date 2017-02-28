@@ -48,20 +48,19 @@ public class StockTrendAnalysis {
 			
 			List<Double> closeDiff = StreamEx.of(ds).pairMap((a,b)->(Math.log(b)-Math.log(a))).collect(Collectors.toList());
 			
-			IntStream.range(0, closeDiff.size()).forEach(i -> System.out.println(i + "\t" + closeDiff.get(i)));
+			IntStream.range(0, closeDiff.size()).forEach(y->{
+				long count = closeDiff.stream().count();
+				
+				///create a empty vector, whose length is equal to the length of close diff 
+				List<Double> v = Stream.generate(()->new Double(0)).limit(count).mapToDouble(z->z).boxed().collect(Collectors.toList());
+				closeDiff.stream().skip(y - 5 >=0 ? y - 5 : 0).limit(y + 5 < count ? y + 5 : count);
+			});
+			
+			//IntStream.range(0, closeDiff.size()).forEach(i -> System.out.println(i + "\t" + closeDiff.get(i)));
 
 		});
 		
 		
-		
-//		m_stockDataStream.filter(x->x.GetSymbol().compareTo("F") == 0).forEach(x->{
-//			try {
-//				x.GetData(from, to, HistoricalQuote::getClose).forEach(y->System.out.println(y));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		});
 	}
 	
 	
