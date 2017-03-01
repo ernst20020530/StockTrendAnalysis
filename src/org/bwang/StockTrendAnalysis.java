@@ -32,9 +32,9 @@ public class StockTrendAnalysis {
 	
 	public void process(){
 		Calendar from = Calendar.getInstance();
-		from.set(2016, 1, 1);
+		from.set(2017, 1, 1);
 		Calendar to = Calendar.getInstance();
-		to.set(2017, 1, 1);
+		to.set(2017, 2, 1);
 		//m_stockDataList.stream().forEach(x->System.out.println(x.GetSymbol() + " " + x.GetAverage(from, to, Interval.DAILY, HistoricalQuote::getClose).getAsDouble()));
 		
 		m_stockDataList.stream().forEach(x->{
@@ -46,17 +46,24 @@ public class StockTrendAnalysis {
 				e.printStackTrace();
 			}
 			
-			List<Double> closeDiff = StreamEx.of(ds).pairMap((a,b)->(Math.log(b)-Math.log(a))).collect(Collectors.toList());
-			
-			IntStream.range(0, closeDiff.size()).forEach(y->{
-				long count = closeDiff.stream().count();
-				
-				///create a empty vector, whose length is equal to the length of close diff 
-				List<Double> v = Stream.generate(()->new Double(0)).limit(count).mapToDouble(z->z).boxed().collect(Collectors.toList());
-				closeDiff.stream().skip(y - 5 >=0 ? y - 5 : 0).limit(y + 5 < count ? y + 5 : count);
+			//List<Double> closeDiff = StreamEx.of(ds).pairMap((a,b)->(Math.log(b)-Math.log(a))).collect(Collectors.toList());
+			List<Double> closeDiff = IntStream.range(0, 20).mapToDouble(y->y).boxed().collect(Collectors.toList());
+			List<List<?>> res = Algorithm.iterateAndSubCenter(closeDiff, 5, 5);
+
+			res.forEach(z->{
+				z.forEach(y->System.out.print(y + "\t"));
+				System.out.println("");
 			});
+//			IntStream.range(0, closeDiff.size()).forEach(y->{
+//				long count = closeDiff.stream().count();
+//				
+//				///create a empty vector, whose length is equal to the length of close diff 
+//				List<Double> v = Stream.generate(()->new Double(0)).limit(count).mapToDouble(z->z).boxed().collect(Collectors.toList());
+//				closeDiff.stream().skip(y - 5 >=0 ? y - 5 : 0).limit(y - 5 >=0 ? 11 : 11 + y - 5).forEach(z->System.out.print(y + " "+ z + "\t\t"));
+//				System.out.println("\n");
+//			});
 			
-			//IntStream.range(0, closeDiff.size()).forEach(i -> System.out.println(i + "\t" + closeDiff.get(i)));
+//			IntStream.range(0, closeDiff.size()).forEach(i -> System.out.println(i + "\t" + closeDiff.get(i)));
 
 		});
 		
