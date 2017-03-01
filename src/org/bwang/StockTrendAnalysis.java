@@ -48,12 +48,15 @@ public class StockTrendAnalysis {
 			
 			//List<Double> closeDiff = StreamEx.of(ds).pairMap((a,b)->(Math.log(b)-Math.log(a))).collect(Collectors.toList());
 			List<Double> closeDiff = IntStream.range(0, 20).mapToDouble(y->y).boxed().collect(Collectors.toList());
-			List<List<?>> res = Algorithm.iterateAndSubCenter(closeDiff, 5, 5);
+			List<List<Double>> res = Algorithm.iterateAndSubCenter(closeDiff, 5, 5);
 
 			res.forEach(z->{
 				z.forEach(y->System.out.print(y + "\t"));
 				System.out.println("");
 			});
+			
+			Algorithm.CreateVectors(res, ()->new Double(0), 5, 5, res.size());
+
 //			IntStream.range(0, closeDiff.size()).forEach(y->{
 //				long count = closeDiff.stream().count();
 //				
